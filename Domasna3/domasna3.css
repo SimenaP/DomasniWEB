@@ -1,0 +1,10 @@
+.redKol {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(3, 100px);  
+    justify-content: center;
+    margin-top: 200px;
+}
+body{
+    background-color: beige;
+}
