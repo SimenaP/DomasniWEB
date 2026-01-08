@@ -1,0 +1,9 @@
+.logo{
+    width: 200px;
+}
+.is-even{
+    color:red;
+}
+.is-odd{
+    color:darkmagenta;
+}

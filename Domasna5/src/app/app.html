@@ -1,0 +1,9 @@
+<div>
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Moto_Gp_logo.svg/2560px-Moto_Gp_logo.svg.png" alt="motogpLogo">
+</div>
+
+<div>
+  <app-vozac *ngFor="let moto of Shoferi;index as i;even as parni ;odd as neparni" 
+  [motordzija]="moto" [indeks]="i+1" [class.is-even]="parni" [class.is-odd]="neparni"> </app-vozac>
+
+</div>
