@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="TODO.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>To-Do Листа</h2>
+    <input type="text" id="inp" placeholder="Нова задача">
+    <select id="prioritet">
+        <option value="low">Низок</option>
+        <option value="medium">Среден</option>
+        <option value="high">Висок</option>
+    </select>
+    <button id="dodadi">Додади</button>
+
+    <div class="filters">
+        <button data-filter="all">Сите</button>
+        <button data-filter="active">Активни</button>
+        <button data-filter="completed">Завршени</button>
+    </div>
+    <div class="counter">
+        Вкупно: <span id="total">0</span> |
+        Завршени: <span id="zavrseni">0</span>
+    </div>
+  <div class="procent">
+    Завршени(во проценти): <span id="proc">0%</span>
+</div>
+<input type="text" id="prebaraj" placeholder="Пребарај задача">
+    <ul id="zadaci"></ul>
+</div>
+
+<script>
+$(document).ready(function(){
+    function presmetaj(){
+        let vkupno=$("#zadaci li").length;
+        let zavrseni=$("#zadaci li.completed").length;
+        $("#total").text(vkupno);
+        $("#zavrseni").text(zavrseni);
+        let procent=vkupno===0 ? 0 : Math.round((zavrseni/vkupno)*100);
+        $("#proc").text(procent + "%");
+    }
+
+    $("#dodadi").click(function(){
+        let tekst = $("#inp").val();
+        let prioritet = $("#prioritet").val();
+
+        if(tekst !== ""){
+            $("#zadaci").append(`
+                <li class="${prioritet}">
+                    <span>${tekst}</span>
+                    <div class="actions">
+                        <button class="delete">X</button>
+                    </div>
+                </li>
+            `);
+            $("#inp").val("");
+            presmetaj(); 
+        }
+    });
+
+    $("#zadaci").on("click", "span", function(){
+        $(this).parent().toggleClass("completed");
+        presmetaj();
+    });
+
+    $("#zadaci").on("click", ".delete", function(){
+        $(this).closest("li").remove();
+        presmetaj();
+    });
+
+    $(".filters button").click(function(){
+        let filter = $(this).data("filter");
+        $("#zadaci li").show();
+        if(filter === "active"){
+            $("#zadaci li.completed").hide();
+        } 
+        else if(filter === "completed"){
+            $("#zadaci li:not(.completed)").hide();
+        }
+    });
+    $("#prebaraj").on("keyup",function(){
+        let tekst=$(this).val().toLowerCase();
+
+        $("#zadaci li").filter(function(){
+            $(this).toggle($(this).text().toLowerCase().indexOf(tekst)>-1);
+        });
+    });
+
+    $("#zadaci").on("dblclick","span",function(){
+        let tekst=$(this).text();
+        let inp=$("<input type='text'>").val(tekst);
+        $(this).replaceWith(inp);
+        inp.focus();
+
+        inp.on("keydown", function (e) {
+        if (e.key === "Enter") {
+            let nov = inp.val();
+            let novT = $("<span>").text(nov);
+            inp.replaceWith(novT);
+            presmetaj();   
+        }
+    });
+});
+
+});
+</script>
+</body>
+</html> 
