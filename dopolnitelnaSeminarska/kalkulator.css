@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/029/257/209/small/school-background-with-doodles-illustration-in-hand-drawn-style-rulers-triangles-school-supplies-illustration-vector.jpg);
+    background-size:87%;
+    background-position: center;
+    position: relative;
+}
+.calculator{
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 260px;
+    background: white;
+    z-index: 1;
+}
+
+#display {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: right;
+    background: rgb(232, 226, 226);
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+button{
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    color: white;
+    background: green;
+    border-radius: 5px;
+}
+button:hover{
+    color: white;
+    background: rgb(0, 63, 0);
+}
+
+.btns{
+    grid-column: span 2;
+}

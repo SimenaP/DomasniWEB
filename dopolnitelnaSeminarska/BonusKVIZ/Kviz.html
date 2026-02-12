@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Квиз по физика</title>
+    <link rel="stylesheet" type="text/css" href="kviz.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body id="pocetok">
+<h1>Квиз по физика</h1>    
+<br>
+<p class="special">Одговори на следните прашања за да го провериш своето знаење по <strong>физика</strong></p>
+<img class="right" src="https://blogcdn.aakash.ac.in/wordpress_media/2022/07/Blog-Image.jpg" alt="Physics image" width="250" height="250">
+<form method="post"> 
+<div id="p1">
+    <p>
+    1. Колку Њутнови закони постојат? <br>
+    <label><input type="radio" name="p1" value="2" >2</label> <br>
+    <label><input type="radio" name="p1" value="3" >3</label> <br>
+    <label><input type="radio" name="p1" value="4" >4</label> <br>
+    <label><input type="radio" name="p1" value="5" >5</label> <br>
+    </p>
+ </div>   
+<div id="p2">
+ <p>
+    2. Кој закон ја опишува врската помеѓу силата, масата и забрзувањето? <br>
+    <label><input type="radio" name="p2" value="Закон за гравитација" >Закон за гравитација</label> <br>
+    <label><input type="radio" name="p2" value="Прв Њутнов закон" >Прв Њутнов закон</label> <br>
+    <label><input type="radio" name="p2" value="Втор Њутнов закон" >Втор Њутнов закон</label> <br>
+    <label><input type="radio" name="p2" value="Закон за запазување на енергијата" >Закон за запазување на енергијата</label> <br>
+</p>
+</div>
+
+<div id="p3">
+<p>
+    3. Која е мерната единица за енергија? <br>
+    <label><input type="radio" name="p3" value="Џул" >Џул</label> <br>
+    <label><input type="radio" name="p3" value="Ват" >Ват</label> <br>
+    <label><input type="radio" name="p3" value="Паскал" >Паскал</label> <br>
+    <label><input type="radio" name="p3" value="Ампер" >Ампер</label> <br>
+</p>
+</div>
+
+<div id="p4">
+<p>
+    4. Како се нарекува процесот кај кој нема размена на топлина помеѓу околината и системот? <br>
+    <label><input type="radio" name="p4" value="Изобарен" >Изобарен</label> <br>
+    <label><input type="radio" name="p4" value="Изотермен" >Изотермен</label> <br>
+    <label><input type="radio" name="p4" value="Изохорен" >Изохорен</label> <br>
+    <label><input type="radio" name="p4" value="Адијабатски" >Адијабатски</label> <br>
+</p>
+</div>
+
+<div id="p5">
+<p>
+    5. Топче се фрла вертикално нагоре со почетна брзина од 15m/s. Колкава ќе биде висината на која ќе застане пред да почне да паѓа?(Нема отпор со воздухот) <br>
+    <label><input type="radio" name="p5" value="11.47" >11.47</label> <br>
+    <label><input type="radio" name="p5" value="13" >13</label> <br>
+    <label><input type="radio" name="p5" value="17.12" >17.12</label> <br>
+    <label><input type="radio" name="p5" value="22.94" >22.94</label> <br>
+</p>
+</div>
+<p> 
+    <input type="submit" value="Испрати" class="rc">
+    <p id="result"></p>
+    <a class="rc" href="#pocetok">Врати се на почеток</a>
+</p>
+</form>
+<script>
+$(document).ready(function(){
+    $("form").submit(function(e){
+        e.preventDefault();
+
+        let tocni = 0;
+        const odgovori = {
+            p1: "3",
+            p2: "Втор Њутнов закон",
+            p3: "Џул",
+            p4: "Адијабатски",
+            p5: "11.47"
+        };
+        $("label").css("background-color", "");
+        $.each(odgovori, function(prasanje, tocen){
+            let selektiran = $("#" + prasanje + " input:checked");
+            if(selektiran.length > 0){
+                let label = selektiran.parent();
+                if(selektiran.val() === tocen){
+                    tocni++;
+                    label.css("background-color", "green");
+                    label.css("color", "white");
+                } else {
+                    label.css("background-color", "red");
+                    label.css("color", "white");
+                }
+            }
+        });
+
+        $("#result").html(`Имаш <strong>${tocni}</strong> точни одговори од вкупно <strong>5</strong>`);
+    });
+});
+</script>
+
+</body>
+</html>
